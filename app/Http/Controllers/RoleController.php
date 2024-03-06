@@ -9,22 +9,20 @@ use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
 
-    function create()
+    public  function create()
     {
-
-        $users = User::all();
-        $roles = Role::all();
-
-        return view('role.create', ['users' => $users, 'roles' => $roles]);
+        return view('role.create');
     }
 
-    function store()
+    public function store()
     {
         $data = request()->validate([
-            'userId' => ['required', 'numeric'],
-            'roleId' => ['required', 'numeric'],
+            'name' => ['required', 'unique:' .  Role::class . ',name']
         ]);
 
-        $user = User::findOrFail($data['userId']);
+
+        Role::create(['name' => $data['name']]);
+
+        return redirect()->route('assignRole.create');
     }
 }

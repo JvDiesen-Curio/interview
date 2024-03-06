@@ -16,11 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
-                        {{ __('Teams') }}
-                    </x-nav-link>
-                </div>
+                @can('read team')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
+                            {{ __('Teams') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('project.index')" :active="request()->routeIs('project,index')">
                         {{ __('Project') }}

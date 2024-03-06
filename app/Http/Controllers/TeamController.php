@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\team;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDO;
+use PHPUnit\Metadata\Uses;
 
 class TeamController extends Controller
 {
@@ -13,6 +16,11 @@ class TeamController extends Controller
 
     public function index()
     {
+
+        if (!User::findOrFail(Auth::user()->id)->hasPermissionTo('read team')) {
+            return redirect()->route('dashboard');
+        }
+
         $teams = team::with('projects')->get();
 
         return view('team.index', ['teams' => $teams]);

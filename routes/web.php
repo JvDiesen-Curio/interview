@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignRoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
@@ -33,7 +34,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/team', TeamController::class);
     Route::resource('/project', ProjectController::class);
+
+    // Route::middleware('role:Admin')->group(function () {
     Route::resource('/role', RoleController::class);
+    Route::resource('/assignRole', AssignRoleController::class);
+    // });
 });
 
 

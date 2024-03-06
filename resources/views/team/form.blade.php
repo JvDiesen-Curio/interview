@@ -13,10 +13,10 @@
                 <form method="POST" action="{{ $team ? route('team.update', $team) : route('team.store') }}">
                     @csrf
                     @method($team ? 'put' : 'post')
-                    <x-input-test name='name' type='text' label='Name'
-                        value="{{ $team ? old('name', $team->name) : '' }}"></x-input-test>
-                    <x-input-test name='projectName' type='text' label='Project name'
-                        value="{{ old('projectName') }}"></x-input-test>
+                    <x-input name='name' type='text' label='Name'
+                        value="{{ $team ? old('name', $team->name) : '' }}"></x-input>
+                    <x-input name='projectName' type='text' label='Project name'
+                        value="{{ old('projectName') }}"></x-input>
 
 
                     <input class=" text-gray-400" type="submit" value="{{ $team ? 'Update' : 'Save' }}">

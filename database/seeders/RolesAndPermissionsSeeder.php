@@ -14,6 +14,20 @@ class RolesAndPermissionsSeeder  extends Seeder
 
         $role = Role::create(['name' => 'admin']);
 
-        Permission::create(['name' => "create project"]);
+        $permissionCreateProject =   Permission::create(['name' => "create project"]);
+
+        $permissionCreateTeam =   Permission::create(['name' => "create team"]);
+        $permissionReadTeam =   Permission::create(['name' => "read team"]);
+        $permissionEditTeam =   Permission::create(['name' => "edit team"]);
+        $permissionDeleteTeam =   Permission::create(['name' => "delete project"]);
+
+
+
+
+        $role->givePermissionTo($permissionCreateProject->name);
+        $role->givePermissionTo($permissionCreateTeam->name);
+        $role->givePermissionTo($permissionReadTeam->name);
+        $role->givePermissionTo($permissionEditTeam->name);
+        $role->givePermissionTo($permissionDeleteTeam->name);
     }
 }

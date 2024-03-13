@@ -29,8 +29,8 @@ class RoleController extends Controller
         ]);
 
 
-        Role::create(['name' => $data['name']]);
-        return redirect()->route('assignRole.create');
+        $role = Role::create(['name' => $data['name']]);
+        return redirect()->route('role.edit', $role);
     }
 
     public function edit(Role $role)
@@ -54,7 +54,7 @@ class RoleController extends Controller
 
     public function update(Role $role)
     {
-        $permissions = Permission::all();
+
         $rules = ['name' => ['required']];
 
         if (!($role->name === Request()->get('name'))) {
@@ -71,20 +71,31 @@ class RoleController extends Controller
         $role->name = $data['name'];
         $role->update();
 
+
+        // permissions
+        $permissions = Permission::all();
         $formPermissions = request()->all();
+
+        // dd($formPermissions);
 
         unset($formPermissions['_token']);
         unset($formPermissions['_method']);
         unset($formPermissions['name']);
 
         foreach ($permissions as $permission) {
+            $keyFound = false;
             foreach (array_keys($formPermissions) as $formPermissionkey) {
-                dd($permission->name, $formPermissionkey);
-                if ($formPermissionkey === $permission->name) {
-
+                if (str_replace('_', ' ', $formPermissionkey) === $permission->name) {
                     $role->givePermissionTo($permission->name);
+                    $keyFound = true;
+                    break;
                 }
             }
+            if (!$keyFound) {
+                $role->revokePermissionTo($permission->name);
+            }
         }
+
+        return redirect()->route('role.index');
     }
 }

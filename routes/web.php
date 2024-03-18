@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
+use App\Livewire\Counter;
+use App\Livewire\Project;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/assignRole', AssignRoleController::class);
     // });
 });
+
+
 
 
 

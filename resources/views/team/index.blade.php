@@ -65,4 +65,10 @@
             <footer></footer>
         </article>
     </section>
+
+    <section>
+        <main>
+            <livewire:teams-form :team="1">
+        </main>
+    </section>
 </x-app-layout>

@@ -71,6 +71,7 @@
         <article class=" ml-5 border-l-2  p-5">
             <main>
                 <form wire:submit='store'>
+                    @method('put')
                     <div>
                         <label class="text-white" for="name">Name</label>
                         <input id="name" type="text" wire:model.live='name' value="{{ $name }}">

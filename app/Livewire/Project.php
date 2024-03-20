@@ -8,19 +8,25 @@ use Livewire\Component;
 class Project extends Component
 {
     public string $name = '';
-    public ?int $id = null;
+    // public ?int $id = null;
+    public ?ModelsProject $project = null;
 
     public function setProject(ModelsProject $project)
     {
+
         $this->name = $project->name;
+        $this->project = $project;
     }
 
-    public function save()
+    public function store()
     {
-        $project = ModelsProject::findOrFail($this->id);
-        $project->name = $this->name;
-        $project->update();
-        $this->clearForm();
+        if ($this->project) {
+            $this->project->name = $this->name;
+            $this->project->update();
+            $this->clearForm();
+        }
+
+        return $this->redirect('/project');
     }
 
     public string $input = '';
@@ -35,6 +41,6 @@ class Project extends Component
     private function clearForm()
     {
         $this->name = '';
-        $this->id = null;
+        $this->project = null;
     }
 }

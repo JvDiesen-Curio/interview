@@ -17,9 +17,9 @@ class TeamController extends Controller
     public function index()
     {
 
-        if (!User::findOrFail(Auth::user()->id)->hasPermissionTo('read team')) {
-            return redirect()->route('dashboard');
-        }
+        // if (!User::findOrFail(Auth::user()->id)->hasPermissionTo('read team')) {
+        //     return redirect()->route('dashboard');
+        // }
 
         $teams = team::with('projects')->get();
 

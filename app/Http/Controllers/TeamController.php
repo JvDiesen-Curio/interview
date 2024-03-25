@@ -51,7 +51,9 @@ class TeamController extends Controller
     //Get: edit 
     public function edit(Team $team)
     {
-        return view('team.form', ['team' => $team]);
+        $teams = team::with('projects')->get();
+
+        return view('team.index', ['teams' => $teams, 'editTeam' => $team]);
     }
 
     //Put: update

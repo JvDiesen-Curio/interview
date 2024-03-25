@@ -11,19 +11,16 @@ class TeamsForm extends Component
     public FormsTeamsForm $form;
 
 
-
-    public function mount(team $team)
+    public function mount($team)
     {
-
+        if (!$team) return;
         $this->form->set($team);
     }
 
 
     public function save()
     {
-
-        $this->form->update();
-
+        $this->form->save();
         return $this->redirect('/team');
     }
 

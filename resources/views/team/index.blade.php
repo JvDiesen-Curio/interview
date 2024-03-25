@@ -1,9 +1,13 @@
+@props(['editTeam' => null])
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Team') }}
         </h2>
     </x-slot>
+
+
 
     <section class="w-ful flex justify-center  pt-5 px-5 ">
         <article class="w-3/5 bg-gray-800 p-2 rounded-lg">
@@ -68,7 +72,7 @@
 
     <section>
         <main>
-            <livewire:teams-form :team="1">
+            <livewire:teams-form :team="$editTeam">
         </main>
     </section>
 </x-app-layout>

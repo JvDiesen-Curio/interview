@@ -9,7 +9,7 @@ use Livewire\Form;
 class TeamsForm extends Form
 {
 
-    public ?team $team;
+    public ?team $team = null;
 
     #[Validate('required')]
     public string $name = '';
@@ -22,21 +22,25 @@ class TeamsForm extends Form
         $this->name = $team->name;
     }
 
-    public function store()
+    public function save()
     {
-        $this->validate();
+        if ($this->team) {
+            $this->update();
+        } else {
+            $this->store();
+        }
+    }
 
-        team::create($this->all());
 
+    private function store()
+    {
+        team::create($this->validate());
         $this->reset();
     }
 
-    public function update()
+    private function update()
     {
-        $this->validate();
-
-        $this->team->update($this->all());
-
+        $this->team->update($this->validate());
         $this->reset();
     }
 }

@@ -15,6 +15,11 @@ class Interview extends Component
         $this->editInterview = $interview;
     }
 
+    public function mount($interview)
+    {
+        if ($interview) $this->editInterview = $interview;
+    }
+
     public function render()
     {
         $interviews = ModelsInterview::all();

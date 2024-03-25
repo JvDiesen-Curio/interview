@@ -26,6 +26,7 @@ class InterviewForm extends Component
 
     public function save()
     {
+        dd($this->all());
         $this->form->save();
         return $this->redirect('/interview');
         $this->questions[0]->save();

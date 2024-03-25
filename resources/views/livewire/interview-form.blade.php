@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit='save'>
+    <form>
         <div>
             <label class="text-white" for="description">Description</label>
             <input id="description" type="text" wire:model='form.description'>
@@ -20,14 +20,20 @@
         </div>
 
         <div>
-            <button class=" bg-red-600 font-extrabold w-full " wire:click="addQuestion()">+</button>
+
 
             @foreach ($questions as $question)
-                <livewire:questionform :question="$question" :key='$loop->index'>
+                {{-- <livewire:questionform mod:question="$question" :key='$loop->index'> --}}
+                <div>
+                    <label class="text-white" for="description">Description</label>
+                    <input id="description" type="text" wire:model="$question">
+                </div>
             @endforeach
 
         </div>
-        <input class="w-full bg-black text-white" type="submit" value="Save">
     </form>
+    <button class=" bg-red-600 font-extrabold w-full" wire:click="addQuestion()">+</button>
+    <input class="w-full bg-black text-white" type="submit" value="Save" wire:click="save()">
+
     </main>
 </div>
